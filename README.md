@@ -1,6 +1,6 @@
 ```
 brew install python
-pip3 install datasette csvs-to-sqlite datasette-cluster-map
+pip3 install datasette datasette-cluster-map csvs-to-sqlite
 ```
 
 Download relevant data, being sure to select 'include stop and search' data
@@ -21,7 +21,7 @@ Local server
 
 Install and login to the CLI
 
-`datasette publish heroku stopandsearch.db -n stopandsearch`
+`datasette publish heroku stopandsearch.db -n stopandsearch --install=datasette-cluster-map`
 
 
 ```
