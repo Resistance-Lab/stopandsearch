@@ -1,6 +1,6 @@
 ```
 brew install python
-pip3 install datasette csvs-to-sqlite
+pip3 install datasette csvs-to-sqlite datasette-cluster-map
 ```
 
 Download relevant data, being sure to select 'include stop and search' data
@@ -15,6 +15,18 @@ Make one table with all stop and search in it
 
 Register for Heroku
 
+Local server
+
+`datasette serve stopandsearch.db`
+
 Install and login to the CLI
 
 `datasette publish heroku stopandsearch.db -n stopandsearch`
+
+
+```
+sqlite stopandsearch.db
+ALTER TABLE stop_and_search ADD admin_ward text
+ALTER TABLE stop_and_search ADD postcode text;
+ALTER TABLE stop_and_search ADD lsoa text;
+```
