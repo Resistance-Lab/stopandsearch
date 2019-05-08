@@ -7,7 +7,7 @@ Download relevant data, being sure to select 'include stop and search' data
 
 `https://data.police.uk/data/`
 
-Make a folder for it, and it it in 'data'
+Extract the resulting zip file into ./data
 
 Make one table with all stop and search in it
 
