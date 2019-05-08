@@ -1,6 +1,6 @@
 ```
 brew install python
-pip3 install datasette datasette-cluster-map csvs-to-sqlite
+pip3 install -r requirements.txt
 ```
 
 Download relevant data, being sure to select 'include stop and search' data
