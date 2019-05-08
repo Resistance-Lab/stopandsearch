@@ -11,7 +11,7 @@ Extract the resulting zip file into ./data
 
 Make one table with all stop and search in it
 
-`csvs-to-sqlite ./data/*/*stop-and-search.csv stop-and-search.db -t stop_and_search`
+`csvs-to-sqlite ./data/*/*stop-and-search.csv stopandsearch.db -t stop_and_search`
 
 Register for Heroku
 
