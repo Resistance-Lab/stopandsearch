@@ -1,3 +1,4 @@
 datasette
 datasette-cluster-map
+datasette-vega
 csvs-to-sqlite
