@@ -1,17 +1,17 @@
 ```
 brew install python
-pip3 install datasette datasette-cluster-map csvs-to-sqlite
+pip3 install -r requirements.txt
 ```
 
 Download relevant data, being sure to select 'include stop and search' data
 
 `https://data.police.uk/data/`
 
-Make a folder for it, and it it in 'data'
+Extract the resulting zip file into ./data
 
 Make one table with all stop and search in it
 
-`csvs-to-sqlite ./data/*/*stop-and-search.csv stop-and-search.db -t stop_and_search`
+`csvs-to-sqlite ./data/*/*stop-and-search.csv stopandsearch.db -t stop_and_search`
 
 Register for Heroku
 
