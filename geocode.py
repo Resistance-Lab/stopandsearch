@@ -16,6 +16,8 @@ def connect_db():
 def generate_query(rows):
     lat_lon = {"geolocations": []}
     for row in rows:
+        if row[0] is None or row[1] is None:
+            continue
         lat_lon['geolocations'].append(
             {"longitude": row[1], "latitude": row[0]}
         )
@@ -102,6 +104,8 @@ def main():
                     SELECT DISTINCT latitude, longitude
                     FROM stop_and_search
                     WHERE geocode_failed IS NULL
+                    AND longitude IS NOT NULL
+                    AND latitude IS NOT NULL
                     LIMIT ?""",
                               [REQUEST_LIMIT]
                               ).fetchall()
