@@ -54,12 +54,14 @@ def update_db(db, results):
         SET admin_ward=?,
         postcode=?,
         lsoa=?,
+        admin_ward_code=?,
         geocode_failed=0
         WHERE latitude=?
         AND longitude=?
         """, (result['result'][0]['admin_ward'],
               result['result'][0]['postcode'],
               result['result'][0]['lsoa'],
+              result['result'][0]['codes']['admin_ward'],
               result['query']['latitude'],
               result['query']['longitude']))
         db.commit()
@@ -90,6 +92,7 @@ def add_columns(db):
     maybe_add_column(db, 'ALTER TABLE stop_and_search ADD postcode text;')
     maybe_add_column(db, 'ALTER TABLE stop_and_search ADD lsoa text;')
     maybe_add_column(db, 'ALTER TABLE stop_and_search ADD geocode_failed integer;')  # noqa: E501
+    maybe_add_column(db, 'ALTER TABLE stop_and_search ADD admin_ward_code text;')  # noqa: E501
 
 
 def main():
