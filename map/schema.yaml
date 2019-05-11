@@ -1,0 +1,23 @@
+openapi: 3.0.0
+info:
+  title: Stop And Search API
+  version: '0.1'
+  description: An API to get geojson data about Stop And Search data
+paths:
+  /api/wards:
+    get:
+      responses:
+        '200':
+          description: A geojson representation of relevant wards
+          content:
+            application/json:
+              schema:
+                externalDocs:
+                  url: 'https://geojson.org'
+                  description: 'See the GeoJSON website for docs on this format'
+      summary: Return a geojson representation of all the relevant wards
+      description: |
+        This returns a geojson representation of all wards that are found in the stopandsearch.db sqlite database, and could be found in wards.json.  There are missing wards which we have been unable to identify the source of.
+
+        In the future this will also include data for each ward, allowing us to color them.
+      operationId: list_wards
