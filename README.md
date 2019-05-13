@@ -35,7 +35,7 @@ Register for Heroku, and download and install the CLI.
 
 Execute the following command. You're done!
 
-`datasette publish heroku stopandsearch.db -n stopandsearch --install=datasette-cluster-map datasette-vega`
+`datasette publish heroku stopandsearch.db -n stopandsearch --install=datasette-cluster-map --install=datasette-vega`
 
 ## Geocoding locations
 
