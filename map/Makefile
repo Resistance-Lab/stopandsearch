@@ -11,3 +11,5 @@ wards.json:
 test:
 	flake8 stopandsearchapi.py
 	nosetests
+static/data/wards.json:
+	python stopandsearchapi.py generate

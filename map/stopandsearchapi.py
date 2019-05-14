@@ -6,6 +6,7 @@ from contextlib import closing
 import sqlite3
 import json
 import uvicorn
+import sys
 
 # Config
 DATABASE = '../stopandsearch.db'
@@ -69,7 +70,7 @@ app = Starlette(debug=DEBUG)
 app.mount('/static', StaticFiles(directory='static'), name='static')
 @app.route('/')
 async def index(request):
-    return FileResponse('static/index.html')
+    return FileResponse('static/dev.html')
 
 
 @app.route('/api/wards')
@@ -77,4 +78,10 @@ async def list_wards(request):
     return JSONResponse(wards_with_count())
 
 if __name__ == '__main__':
-    uvicorn.run(app, host='0.0.0.0', port=8002)
+    if sys.argv[1] == 'generate':
+        print("Generating static/data/wards.json")
+        wards = wards_with_count()
+        with open('static/data/wards.json', 'w') as outfile:
+            json.dump(wards, outfile)
+    else:
+        uvicorn.run(app, host='0.0.0.0', port=8002)

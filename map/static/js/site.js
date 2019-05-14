@@ -76,11 +76,12 @@ function onEachFeature(feature, layer) {
 }
 
 // wards.json comes from https://github.com/martinjc/UK-GeoJSON/json/electoral/eng/wards.json
-fetch('/api/wards')
+fetch(dataSource)
 .then(
     function(response) {
         if (response.status !== 200) {
             console.log("Failed to load wards");
+            console.log(dataSource);
             return;
         }
 
