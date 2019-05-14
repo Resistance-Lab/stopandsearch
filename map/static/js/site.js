@@ -22,13 +22,12 @@ info.update = function (props) {
 info.addTo(mymap);
 
 function getColor(d) {
-    let max = 713; // @TODO remove this hard-coded max
     d = Number(d);
-    return d/max > 0.8 ? '#54278f' :
-           d/max > 0.6 ? '#756bb1' :
-           d/max > 0.4 ? '#9e9ac8' :
-           d/max > 0.2 ? '#cbc9e2' :
-                        '#f2f0f7'
+    return Math.log(d) > 8 ? '#d7191c' :
+           Math.log(d) > 6 ? '#fdae61' :
+           Math.log(d) > 4 ? '#ffffbf' :
+           Math.log(d) > 2 ? '#abd9e9' :
+                        '#2c7bb6'
 }
 
 function style(feature) {
