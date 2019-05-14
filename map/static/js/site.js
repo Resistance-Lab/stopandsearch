@@ -74,7 +74,6 @@ function onEachFeature(feature, layer) {
     });
 }
 
-// wards.json comes from https://github.com/martinjc/UK-GeoJSON/json/electoral/eng/wards.json
 fetch(dataSource)
 .then(
     function(response) {
