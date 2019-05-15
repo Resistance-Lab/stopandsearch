@@ -1,0 +1,32 @@
+---
+title: "Stop And Search"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This directory provides tooling to get you started with analysing stop and search data with R.  It uses the data in the parent directory's sqlite database.
+
+## Data Sources
+
+* The data as described in the parent directory
+* [martinjc's UK-GeoJSON](https://github.com/martinjc/UK-GeoJSON/json/electoral/eng/wards.json)
+
+## Usage
+
+The `01-load.R` file is used to create an Rdata dump of the sqlite database in the parent directory, perform some minor cleaning, and save it to `./data/stop_and_search.Rdata`
+
+You can use this data as follows:
+
+
+```{r}
+load("data/stop_and_search.Rdata")
+```
+
+You can then start plotting things with it:
+
+```{r}
+dotchart(table(stop_and_search$Gender), main="Self-reported ethnicity")
+```
