@@ -78,7 +78,7 @@ async def list_wards(request):
     return JSONResponse(wards_with_count())
 
 if __name__ == '__main__':
-    if sys.argv[1] == 'generate':
+    if len(sys.argv) > 1 and sys.argv[1] == 'generate':
         print("Generating static/data/wards.json")
         wards = wards_with_count()
         with open('static/data/wards.json', 'w') as outfile:
