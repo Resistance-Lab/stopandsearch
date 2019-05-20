@@ -4,6 +4,18 @@ This is a python app which serves a map of wards, with colors relating to the nu
 
 ## Usage
 
+### Using Docker
+
+```
+make -f Makefile.docker deps
+make -f Makefile.docker wards.json
+make -f Makefile.docker run
+```
+
+If `make -f Makefile.docker wards.json` fails, try increasing the memory available to Docker (works for me on 8GB, defaults to 2GB).
+
+### Not using Docker
+
 This requires Python 3.6+ to run
 
 ```

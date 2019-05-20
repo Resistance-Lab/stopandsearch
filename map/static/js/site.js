@@ -1,13 +1,17 @@
 // this view is hard coded, with values taken from an sqlite query of avg(Latitude), avg(Longitude)
 // @TODO remove this hard-coded view
-var mymap = L.map('mapid').setView([53.4922408329043, -2.26028670881596], 9);
+var map = L.map('mapid').setView([53.4922408329043, -2.26028670881596], 9);
 
 var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 var osmAttrib = 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors';
 var osm = new L.TileLayer(osmUrl, {minZoom: 2, maxZoom: 12, attribution: osmAttrib});
-mymap.addLayer(osm);
-
+map.addLayer(osm);
 var geojson;
+var colours = ['#fff7ec','#fee8c8','#fdd49e',
+               '#fdbb84','#fc8d59','#ef6548',
+               '#d7301f','#b30000','#7f0000']
+// @TODO: Calculate this from the sqlite at load time
+var maxStopAndSearchCount = 713
 
 // the info box at the top right
 var info = L.control();
@@ -19,15 +23,44 @@ info.onAdd = function(map) {
 info.update = function (props) {
     this._div.innerHTML = '<h4>Number of searches</h4>' + (props ? '<b>' + props.properties['wd18nm'] + '</b><br />' + props.results + ' searches' : 'Hover over a ward');
 };
-info.addTo(mymap);
+info.addTo(map);
+
+// Map legend
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = createLegendScale(colours.length, maxStopAndSearchCount),
+        labels = [];
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length - 1; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor(grades[i]) + '"></i> '
+                                    + grades[i]
+                                    + '&ndash;'
+                                    + grades[i + 1]
+                                    + '<br>';
+    }
+    return div;
+};
+
+legend.addTo(map);
 
 function getColor(d) {
-    d = Number(d);
-    return Math.log(d) > 8 ? '#d7191c' :
-           Math.log(d) > 6 ? '#fdae61' :
-           Math.log(d) > 4 ? '#ffffbf' :
-           Math.log(d) > 2 ? '#abd9e9' :
-                        '#2c7bb6'
+    fn = Math.round((Math.log2(Number(d)) / Math.log2(maxStopAndSearchCount)) * (colours.length - 1))
+    return colours[fn]
+}
+
+function createLegendScale(steps, max) {
+    var scale = []
+    scale.push(0)
+    for(var i = 1; i < steps; i++) {
+      // TODO: Confirm this is right - not sure
+      fn = Math.pow(2, (i / steps) * Math.log2(max))
+      scale.push(Math.round(fn))
+    }
+    scale.push(max)
+    return scale
 }
 
 function style(feature) {
@@ -63,7 +96,7 @@ function resetHighlight(e) {
 }
 
 function zoomToFeature(e) {
-    mymap.fitBounds(e.target.getBounds());
+    map.fitBounds(e.target.getBounds());
 }
 
 function onEachFeature(feature, layer) {
@@ -84,12 +117,12 @@ fetch(dataSource)
         }
 
         response.json().then(function(data) {
-            console.log(data);
+            // console.log(data);
             // @TODO colorize the wards with different filters
             geojson = L.geoJSON(data, {
                 style: style,
                 onEachFeature: onEachFeature
-            }).addTo(mymap)
+            }).addTo(map)
         })
     }
 ).catch(function(err) {

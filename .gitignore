@@ -1,4 +1,6 @@
 data/*
+map/wards.json
+map/wards.kml
 venv
 .DS_Store
 .idea
