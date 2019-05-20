@@ -7,6 +7,7 @@ This is a python app which serves a map of wards, with colors relating to the nu
 This requires Python 3.6+ to run
 
 ```
+make deps # run once, to ensure dependencies are installed
 make wards.json # to download and convert a huge kml file to geojson
 make # to actually run it
 open http://localhost:8002 # to view it in a browser
@@ -19,6 +20,10 @@ make static/data/wards.json
 cd static
 python -m http.server || python -m SimpleHTTPServer
 ```
+
+To simplify all of this, you can also run it in Docker.  In which case change `make` to `make -f Makefile.docker` in all of the above instructions.
+
+Regardless of how you run it, generating the geojson file will take a long time.  And on machines with limited resources, may even fail to run at all.
 
 ## Development
 
