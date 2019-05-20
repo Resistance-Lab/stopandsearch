@@ -2,3 +2,5 @@ starlette
 aiofiles
 uvicorn
 kml2geojson
+nose
+flake8
