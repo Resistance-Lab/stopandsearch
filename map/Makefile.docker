@@ -1,5 +1,5 @@
-.PHONY: serve
-serve:
+.PHONY: run
+run:
 	docker run -p 8002:8002 -v `pwd`/..:/tmp/work -w /tmp/work/map stopandsearch/map python stopandsearchapi.py
 .PHONY: deps
 deps:

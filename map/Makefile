@@ -1,5 +1,5 @@
-.PHONY: serve
-serve:
+.PHONY: run
+run:
 	python stopandsearchapi.py
 .PHONY: deps
 deps:

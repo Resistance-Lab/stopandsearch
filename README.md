@@ -6,10 +6,21 @@ A tool to analyse UK stop and search data. Currently focused on Greater Manchest
 
 You will need Python and the Datasette tool, which does all the heavy lifting.  For Mac OS you can achieve this with the following
 
+### Using Docker
+
+```
+make -f Makefile.docker deps
+make -f Makefile.docker run
+```
+
+### Not using Docker
+
 ```
 brew install python
 pip3 install -r requirements.txt
 ```
+
+### Downloading the data
 
 Download relevant data from the areas you're interested in from the [police.uk](https://data.police.uk/data/) database, being sure to select 'include stop and search' data.
 
