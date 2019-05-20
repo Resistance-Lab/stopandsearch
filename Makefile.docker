@@ -1,0 +1,12 @@
+.PHONY: deps
+deps:
+	docker build -t stopandsearch/stopandsearch .
+
+.PHONY: run
+run:
+	docker run -v `pwd`:/tmp/work -w /tmp/work -p 8001:8001 stopandsearch/stopandsearch datasette serve stopandsearch.db -h 0.0.0.0
+
+.PHONY: test
+test:
+	docker run -v `pwd`:/tmp/work -w /tmp/work stopandsearch/stopandsearch flake8 geocode.py
+	docker run -v `pwd`:/tmp/work -w /tmp/work stopandsearch/stopandsearch nosetests

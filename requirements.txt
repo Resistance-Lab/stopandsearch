@@ -2,3 +2,6 @@ datasette
 datasette-cluster-map
 datasette-vega
 csvs-to-sqlite
+flake8
+nose
+requests
